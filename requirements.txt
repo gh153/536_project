@@ -1,0 +1,7 @@
+flask
+sqlite3
+datetime
+cvxopt
+numpy
+pandas
+yfinance
