@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Portfolio Rebalancing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to Your Stock Portfolio!</h1>
+    
+    <!-- Display the user's current balance -->
+    <p>Your Current Balance: <strong>${{ balance }}</strong></p>
+
+    <!-- Risk Tolerance Input -->
+    <form method="POST" action="{{ url_for('portfolio_selection') }}">
+        <label for="risk_tolerance">Risk Tolerance (0-100):</label>
+        <input type="float" id="risk_tolerance" name="risk_tolerance" min="0" max="100" required>
+        <br><br>
+
+        <!-- Select Multiple Stocks -->
+        <label for="selected_columns">Select Stocks:</label>
+        <select name="selected_columns" size="8" multiple required>
+            {% for column in columns %}
+                <option value="{{ column }}" {% if column in default_columns %}selected{% endif %}>{{ column }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <input type="submit" value="Rebalance Portfolio">
+    </form>
+
+    <!-- Display the Alloc DataFrame (if available) -->
+    {% if alloc is not none %}
+        <h3>Asset Allocation (Alloc):</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Stock</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock, weight in alloc.items() %}
+                    <tr>
+                        <td>{{ stock }}</td>
+                        <td>{{ weight }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <!-- Buy Stock Form -->
+    <h2>Buy Stock</h2>
+    <form method="POST" action="{{ url_for('buy_stock') }}">
+        <label for="stock_symbol">Stock Symbol:</label>
+        <input type="text" id="stock_symbol" name="stock_symbol" required>
+        <br><br>
+
+        <label for="amount_to_spend">Amount to Spend ($):</label>
+        <input type="number" id="amount_to_spend" name="amount_to_spend" min="1" required>
+        <br><br>
+
+        <input type="submit" value="Buy Stock">
+    </form>
+
+    <!-- Sell Stock Form -->
+    <h2>Sell Stock</h2>
+    <form method="POST" action="{{ url_for('sell_stock') }}">
+        <label for="stock_symbol_sell">Stock Symbol:</label>
+        <input type="text" id="stock_symbol_sell" name="stock_symbol" required>
+        <br><br>
+
+        <label for="share_amount">Amount of Shares to Sell:</label>
+        <input type="number" id="share_amount" name="share_amount" min="1" required>
+        <br><br>
+
+        <input type="submit" value="Sell Stock">
+    </form>
+
+    <!-- Display Success or Error Message -->
+    {% if success_message %}
+        <p style="color: green;">{{ success_message }}</p>
+    {% endif %}
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <!-- Button to Check All Stocks -->
+    <form method="GET" action="{{ url_for('check_all_stocks') }}">
+        <input type="submit" value="Check All Stocks">
+    </form>
+
+    <!-- Display all stocks and number of shares -->
+    {% if stock_data %}
+        <h3>All Stocks and Number of Shares:</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Stock Symbol</th>
+                    <th>Total Shares</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock, total_shares in stock_data %}
+                    <tr>
+                        <td>{{ stock }}</td>
+                        <td>{{ total_shares }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,97 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    padding: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+form {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="float"],
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+select {
+    height: auto;
+}
+
+input[type="submit"] {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #1f6691;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #ecf0f1;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1.1rem;
+}
+
+p strong {
+    font-size: 1.2rem;
+    color: #16a085;
+}
+
+p[style*="color: green"] {
+    font-weight: bold;
+}
+
+p[style*="color: red"] {
+    font-weight: bold;
+}
